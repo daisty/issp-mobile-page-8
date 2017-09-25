@@ -1,20 +1,11 @@
+<ion-header>
+  <ion-navbar>
+    <img ion-right src="assets/imgs/bananalogo.png" class="navbarLogo" />
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
 
-<ion-content id="welcome">
-    <div id="home-bg"></div>
-    <div id="content">
-        <div id="profile-info">
-            <img id="avatar-img" src="assets/imgs/avatar4.png">
-            <h2 id="person-name">王博文 <ion-icon name="my-avatar" color="energy" id="person"></ion-icon></h2>
-            <p id="profile-text">IKE00318 <span>一线实施体系</span></p>
-        </div>
-        <ion-list inset>
-            <ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-                {{ item.title }}
-                <span item-right class="news-color">{{ item.message }}</span>
-                <ion-icon name="my-arrow-right" md="md-my-arrow-right" color="energy" clear item-right></ion-icon>
-            </ion-item>
-        </ion-list>
-        <button ion-button round block color="danger" class="esc-button">退出当前账号</button>
-    </div>
+<ion-content padding>
+  <!-- <h2>Welcome to Banana Project</h2> -->
+  <button ion-button color="primary" (click)="logout()">Logout</button>
 </ion-content>
-

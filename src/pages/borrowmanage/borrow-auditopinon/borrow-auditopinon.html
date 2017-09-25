@@ -1,0 +1,31 @@
+<ion-header>
+
+  <ion-navbar  color="energy" no-border-bottom>
+    <ion-title class="toCenter">审核意见</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only class="submit" (click)="confirm()">
+        确认
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+<ion-content id="content">
+  <ion-list>
+      <ion-item class="marginBot-10">
+        <ion-label>审核身份</ion-label>
+        <ion-select [(ngModel)]="paramObj.lendIndentityStatus">
+          <ion-option value="CHARGER">负责人</ion-option>
+          <ion-option value="FINACER">财务运营部</ion-option>
+          <ion-option value="MANAGER">总经办</ion-option>
+        </ion-select>
+    </ion-item>
+      <my-radio 
+        buttonColor='#limegreen' [(radio)]='paramObj.chargerPass'>
+        </my-radio>
+      <ion-item class="marginTop-10">
+        审核原因<br><textarea [(ngModel)]="paramObj.chargerOpinion" placeholder="请输入原因" class="expl"></textarea>
+      </ion-item>
+  </ion-list>
+
+</ion-content>

@@ -8,6 +8,7 @@ import { ReimbursementInvoiceModule } from './reimbursement-invoice/reimbursemen
 import { MailingPageModule } from './mailing/mailing.module';
 import { PaymentModule } from './payment/payment.module';
 
+
 @NgModule({
   declarations: [
     ReimbursementPage,
@@ -20,10 +21,10 @@ import { PaymentModule } from './payment/payment.module';
     ReimbursementInvoiceModule,
     MailingPageModule,
     PaymentModule
+
   ],
   exports: [
-    ReimbursementPage,
- 
+    ReimbursementPage
   ]
 })
 export class ReimbursementPageModule {}

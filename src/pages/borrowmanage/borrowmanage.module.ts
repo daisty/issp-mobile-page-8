@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { BorrowManagePage } from './borrowmanage';
-import { BorrowReturnPageModule } from '../borrow-return/borrow-return.module';
-import { BorrowSendPageModule } from '../borrow-send/borrow-send.module';
+import { BorrowDetailPageModule } from './borrow-detail/borrow-detail.module';
+import { SharedModule } from '../../app/shared.module';
 
 @NgModule({
   declarations: [
@@ -10,11 +10,12 @@ import { BorrowSendPageModule } from '../borrow-send/borrow-send.module';
   ],
   imports: [
     IonicPageModule.forChild(BorrowManagePage),
-    BorrowReturnPageModule,
-    BorrowSendPageModule
+    SharedModule,
+    BorrowDetailPageModule
   ],
   exports: [
     BorrowManagePage
   ],
+  providers: [],
 })
 export class BorrowManagePageModule {}

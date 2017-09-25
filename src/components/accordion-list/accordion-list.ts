@@ -11,7 +11,7 @@ export class AccordionListComponent {
   @Input() title: string;
   @Input() hasMargin: boolean = true;
 
-  @ViewChild('accordionContent') elementView: ElementRef;
+  @ViewChild('abc') elementView: ElementRef;
 
   expanded: boolean = false;
   viewHeight: number;

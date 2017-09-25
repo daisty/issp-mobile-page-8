@@ -1,0 +1,126 @@
+
+<ion-header >
+
+  <ion-navbar color="energy" no-border-bottom>
+    <ion-title>申请借款</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only class="submit" (click)="submit()">
+        提交
+      </button>
+   </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content id="content">
+  <ion-list>
+    <ion-item>
+      <ion-label>预计借款时间</ion-label>
+      <ion-datetime displayFormat="YYYY-MM-DD" cancelText="取消" doneText="确认" max="2020-10-31" bindon-ngModel="paramObj.estimateLendDate"></ion-datetime>
+    </ion-item>
+    <ion-item>
+        <ion-label>借款人</ion-label>
+        <ion-select [(ngModel)]="paramObj.lender" okText="确认" cancelText="取消">
+          <ion-option >李中基</ion-option>
+          <ion-option >王博文</ion-option>
+          <ion-option >胡歌</ion-option>
+          <ion-option >鹿晗</ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label>借款方式</ion-label>
+        <ion-select [(ngModel)]="paramObj.lendWay" okText="确认" cancelText="取消">
+          <ion-option >欠条</ion-option>
+          <ion-option >银行</ion-option>
+          <ion-option >支付宝</ion-option>
+          <ion-option >微信</ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label>负责人</ion-label>
+        <ion-select [(ngModel)]="paramObj.charger" okText="确认" cancelText="取消">
+          <ion-option >唐海湘</ion-option>
+          <ion-option >戴秀花</ion-option>
+          <ion-option >李燕湘</ion-option>
+          <ion-option >213</ion-option>
+          <ion-option >456</ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label>地区</ion-label>
+        <ion-select [(ngModel)]="paramObj.area"okText="确认" cancelText="取消">
+          <ion-option >广州</ion-option>
+          <ion-option >深圳</ion-option>
+          <ion-option >上海</ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label>项目名称</ion-label>
+        <ion-select [(ngModel)]="paramObj.projectName"okText="确认" cancelText="取消">
+          <ion-option >issp</ion-option>
+          <ion-option >社区联盟</ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label>项目组</ion-label>
+        <ion-select [(ngModel)]="paramObj.projectGroup" okText="确认" cancelText="取消">
+          <ion-option >前端</ion-option>
+          <ion-option >后台</ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label>一级科目</ion-label>
+        <ion-select [(ngModel)]="paramObj.firstSubject" okText="确认" cancelText="取消">
+          <ion-option >一级科目1</ion-option>
+          <ion-option >一级科目2</ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label>二级科目</ion-label>
+        <ion-select [(ngModel)]="paramObj.secondSubject" okText="确认" cancelText="取消">
+          <ion-option >二级科目1</ion-option>
+          <ion-option >二级科目2</ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label>三级科目</ion-label>
+        <ion-select [(ngModel)]="paramObj.thirdSubject" okText="确认" cancelText="取消">
+          <ion-option >三级科目1</ion-option>
+          <ion-option >三级科目2</ion-option>
+        </ion-select>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-item class="money">
+      <ion-label>借款金额</ion-label>
+      <ion-input type="text" item-right [(ngModel)]="paramObj.money" placeholder="请输入金额"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>补充说明<span class="selFont">(借款事由)</span></ion-label>
+      <ion-input type="text" [(ngModel)]="paramObj.lendReson" item-right placeholder="请输入补充说明"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>参与人<span class="selFont">(选填)</span></ion-label>
+      <ion-input type="text" [(ngModel)]="paramObj.attender" item-right placeholder="请输入参与人"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>商品链接<span class="selFont">(选填)</span></ion-label>
+      <ion-input type="text" [(ngModel)]="paramObj.goodsLink" item-right placeholder="请输入链接"></ion-input>
+    </ion-item>
+    <ion-item class="noBBottom">
+      上传凭证
+    </ion-item>
+    <ion-item>
+      <div class="upload">
+        <span class="image" (click)="addImage()"><img class="img" src="assets/imgs/addImage.png"></span>
+        <span class="image" *ngFor="let item of Iamges;let i = index;"><img class="img" src="{{item.url}}"><i (click)="delImage(i)"><img src="assets/imgs/close.png"></i></span>
+      </div>
+    </ion-item>
+    <ion-item class="noBBottom">
+      说明
+    </ion-item>
+    <ion-item>
+      <ion-input placeholder="例如： 交代清楚报销事由" [(ngModel)]="paramObj.explains" clearInput class="expl"></ion-input>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -2,25 +2,27 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import { HttpModule } from '@angular/http';
 
-import { Home } from '../pages/home/home';
+
+import { Welcome } from '../pages/welcome/welcome';
+import { Login } from '../pages/login/login';
+import { Signup } from '../pages/signup/signup';
+import { AboutPage } from '../pages/about/about';
+import { ContactPage } from '../pages/contact/contact';
+import { HomePage } from '../pages/home/home';
+import { TabsPage } from '../pages/tabs/tabs';
+import { SettingPage } from '../pages/setting/setting';
 import { SettingPageModule } from '../pages/setting/setting.module';
-
-//报销
+import { ReimbursementPage } from '../pages/reimbursement/reimbursement';
 import { ReimbursementPageModule } from '../pages/reimbursement/reimbursement.module';
+import { ApplyreimbursementPage } from '../pages/applyreimbursement/applyreimbursement';
+import { SharedModule } from './shared.module';
 
-// 报销
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { AccordionListPageModule } from '../pages/accordion-list/accordion-list.module';
-
-//借款
-import { BorrowManagePage } from '../pages/borrowmanage/borrowmanage';
-import { BorrowManagePageModule } from '../pages/borrowmanage/borrowmanage.module';
-import { ApplyborrowmoneyPage } from '../pages/applyborrowmoney/applyborrowmoney';
-import { ApplyborrowmoneyPageModule } from '../pages/applyborrowmoney/applyborrowmoney.module';
-import { BorrowDetailPageModule } from '../pages/borrow-detail/borrow-detail.module';
-import { BorrowReturnPageModule } from '../pages/borrow-return/borrow-return.module';
+import { MultiPickerModule } from 'ion-multi-picker';
+import { PROVIDERS } from './imports';
 
 
 //通讯录
@@ -37,19 +39,18 @@ import { Contacts } from '../providers/contacts';
     Home
     
   ],
+
   imports: [
+    HttpModule,
     BrowserModule,
     IonicModule.forRoot(MyApp,{
-      backButtonText:''
-    },
-    // {
-    //   links: [
-    //     { component: ModalContentPage, name:'ModalContentPage', segment:'modal-content'}
-    //   ]
-    // }
-  ),
+      backButtonText:'',
+    }),
     SettingPageModule,
     ReimbursementPageModule,
+
+    MultiPickerModule ,
+    SharedModule
     BorrowManagePageModule,
     BorrowDetailPageModule,
     ApplyborrowmoneyPageModule,
@@ -61,9 +62,11 @@ import { Contacts } from '../providers/contacts';
   entryComponents: [
     MyApp,
     Home
+
   ],
   providers: [
     StatusBar,
+    PROVIDERS,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ToastService,

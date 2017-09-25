@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 // import $ from 'jquery';
+
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class ToastService {
   private rs:any = {msg:'?'};
-  private token:string = '21f9e147319445549ab82ea05aeb8e6c.3232235716.1505800231722';
+  private token:string = '98583469460d423fa85a04f0d4ba1e64.3232235640.1505879087257';
+
   constructor(
       public http:Http
 ) { 

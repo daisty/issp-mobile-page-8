@@ -14,8 +14,8 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
-$lightColor: #999;
-$darkColor: #333;
+$lightColor:#333;
+$darkColor:#666;
 .list-ios > .item-block {
     &.no-bottom-border {
         border-bottom: none;
@@ -38,3 +38,9 @@ $darkColor: #333;
 .marginTop-10 {
         margin-top:10px;
     }
+.marginBot-10 {
+        margin-bottom:10px;
+    }
+.paddingBot-20 {
+    padding-bottom: 20px;
+}

@@ -1,19 +1,18 @@
-import { COMPONENTS, DIRECTIVES, PIPES } from './app.imports';
+import { COMPONENTS, PIPES } from './imports';
 import { NgModule } from '@angular/core';
 import { IonicModule } from 'ionic-angular';
 
 @NgModule({
   declarations: [
-    PIPES,
-    DIRECTIVES,
-    COMPONENTS
+    COMPONENTS,
+    PIPES
   ],
   imports: [
     IonicModule,
   ],
   exports: [
-    PIPES,
-    COMPONENTS
+    COMPONENTS,
+    PIPES
   ]
 })
 

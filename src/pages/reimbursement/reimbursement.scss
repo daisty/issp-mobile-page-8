@@ -54,12 +54,17 @@ page-reimbursement {
                 text-align: center;
                 padding-left: 0;
                 cursor: pointer;
-                &.active-child{
+                &:first-child{
                     color: #38c0ff;
                 }
             }
             .item-ios{
-                @extend .item-md;
+                text-align: center;
+                padding-left: 0;
+                cursor: pointer;
+                &:first-child{
+                    color: #38c0ff;
+                }
             }
         }
         #status-list{
@@ -91,8 +96,8 @@ page-reimbursement {
                 color: #999;
             }
             .time-date{
-
-                text-align: right;
+                display: flex;
+                flex-direction: column;
                 .new-time{
                     font-size: 1.4rem;
                     color: #999;
