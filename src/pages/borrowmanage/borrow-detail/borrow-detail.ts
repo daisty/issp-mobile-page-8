@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
 import { ToastService } from '../../../providers/util/toast.service';
+import { APP_URL } from '../../../config/config';
 
 @IonicPage()
 @Component({
@@ -50,7 +51,7 @@ export class BorrowDetailPage {
             this.buttonName = '重新编辑提交';
             break;
         }
-    this.http.get(`phoneApplylend/v1/info/lend/${this.id}/${this.buttonStatus}`)
+    this.http.get(APP_URL+`phoneApplylend/v1/info/lend/${this.id}/${this.buttonStatus}`)
     .then(res => {
       this.data = res.data;
       if(this.data.receivePay == '是'){//控制显示按钮      
@@ -78,7 +79,7 @@ export class BorrowDetailPage {
     }else if(status == 'WAITTHAW') {//待解冻
       this.navCtrl.push('ApplyborrowmoneyPage',{id:this.id,name:'EDITERROR'});
     }else if(status == 'WAITPAY') {//去付款
-      this.navCtrl.push('Payment',{id:this.id});
+      this.navCtrl.push('Paymentss',{id:this.id});
     }else if(status == 'HASLEND') {//已借款
       let confirm = this.alertCtrl.create({
         title: '消息提示',
@@ -93,7 +94,7 @@ export class BorrowDetailPage {
             {
               text: '确认',
               handler: () => {
-                this.http.put(`phoneApplylend/v1/editSureRecieve`,{id:this.id})
+                this.http.put(APP_URL + `phoneApplylend/v1/editSureRecieve`,{id:this.id})
                   .then(res => {
                     if(res.code == 0){
                       this.navCtrl.push('BorrowManagePage');

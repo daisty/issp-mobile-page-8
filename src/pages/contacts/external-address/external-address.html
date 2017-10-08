@@ -2,11 +2,6 @@
 <ion-header>
 
   <ion-navbar color="energy">
-    <ion-buttons end>
-      <button ion-button>
-        在职
-      </button>
-    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -16,20 +11,48 @@
   <div id="inter">
     <div class="person-top">
       <ion-avatar class="avatar-head">
-        <img src="assets/imgs/avatar3.png">
-        <ion-icon name="my-avatar" color="energy" class="person"></ion-icon>
+        <img src="assets/imgs/contact_pic.png">
+        <ion-icon name="my-avatar" color="{{exterData.sex | sex}}" class="person"></ion-icon>
       </ion-avatar>
-      <h2>王博文</h2>
-      <p class="post">一线实施体系 <span>产品专员</span></p>
+      <h2>{{exterData.username}}</h2>
+      <p class="post">{{exterData.project}} <span>{{exterData.position}}</span></p>
     </div>
   </div>
   <div id="infoList">
     <ion-list>
-      <ion-item class="item-list" *ngFor="let inforItem of inforItems"> 
-        <span>{{inforItem.tool}}</span>
-        <span>{{inforItem.details}}</span>
+      <ion-item class="item-list"> 
+        <span>电话</span>
+        <span>{{exterData.phone}}</span>
       </ion-item>
-      <ion-item (click)="itemOther()">
+      <ion-item class="item-list"> 
+        <span>邮箱</span>
+        <span>{{exterData.email}}</span>
+      </ion-item>
+      <ion-item class="item-list"> 
+        <span>员工编号</span>
+        <span>{{exterData.number}}</span>
+      </ion-item>
+      <ion-item class="item-list"> 
+        <span>单位</span>
+        <span>{{exterData.unit}}</span>
+      </ion-item>
+      <ion-item class="item-list"> 
+        <span>主要负责</span>
+        <span>{{exterData.responsible}}</span>
+      </ion-item>
+      <ion-item class="item-list"> 
+        <span>地区</span>
+        <span>{{exterData.area}}</span>
+      </ion-item>
+      <ion-item class="item-list"> 
+        <span>填写人</span>
+        <span>{{exterData.writer}}</span>
+      </ion-item>
+      <ion-item class="item-list"> 
+        <span>备注</span>
+        <span>{{exterData.remark}}</span>
+      </ion-item>
+      <ion-item (click)="itemOther(exterData.id)">
         其他
         <ion-icon name="my-arrow-right" md="md-my-arrow-right" color="lightprimary" clear item-right class="right-arraw"></ion-icon>
       </ion-item>  

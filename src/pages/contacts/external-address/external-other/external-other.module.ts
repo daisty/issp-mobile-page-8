@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { ExternalOther } from './external-other';
+import { SharedModule } from '../../../../app/shared.module';
 
 @NgModule({
   declarations: [
@@ -8,6 +9,7 @@ import { ExternalOther } from './external-other';
   ],
   imports: [
     IonicPageModule.forChild(ExternalOther),
+    SharedModule
   ],
   exports: [
     ExternalOther

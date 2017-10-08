@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
 import { ToastService } from '../../../providers/util/toast.service';
+import { APP_URL } from '../../../config/config';
 
 @IonicPage()
 @Component({
@@ -31,7 +32,7 @@ export class BorrowReturnPage {
 
   ionViewDidLoad() {
     //获取来源
-    this.http.get('applylend/v1/listAccountOrigin')
+    this.http.get(APP_URL+ 'applylend/v1/listAccountOrigin')
     .then(res => {
       if(res.code == 0){
         this.payList = res.data;
@@ -39,7 +40,7 @@ export class BorrowReturnPage {
     })
   }
   confirm() :void {
-    this.http.put('phoneApplylend/v1/return/edit',this.paramObj)
+    this.http.put(APP_URL+ 'phoneApplylend/v1/return/edit',this.paramObj)
     .then(res => {
       let msg:string;
       if(res.code == 0){

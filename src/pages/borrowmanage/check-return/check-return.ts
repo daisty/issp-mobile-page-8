@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
 import { ToastService } from '../../../providers/util/toast.service';
+import { APP_URL } from '../../../config/config';
 
 @IonicPage()
 @Component({
@@ -22,7 +23,7 @@ export class CheckReturnPage {
   confirm() :void{
     this.paramObj.documentCondition = this.paramObj.documentCondition?'是':'否';
     this.paramObj.lendRetunStatus = this.paramObj.lendRetunStatus?'PASS':'NOTPASS';
-    this.http.put('phoneApplylend/v1/check/checkReturn',this.paramObj)
+    this.http.put(APP_URL+'phoneApplylend/v1/check/checkReturn',this.paramObj)
     .then(res => {
       let msg:string;
       if(res.code == 0){

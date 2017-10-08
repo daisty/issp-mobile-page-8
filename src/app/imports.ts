@@ -5,13 +5,18 @@ import { MyBackComponent } from '../components/my-back/my-back';
 import { ReviewReasonComponent } from '../components/reviewReason/reviewReason';
 import { AreasSelect } from '../components/test/test';
 
+
 // Pipes
 import { StatusPipe } from '../pipes/status.pipes';
 import { ColorPipe } from '../pipes/color/color';
 import { TimePipe } from '../pipes/time.pipes';
+import { SexPipe } from '../pipes/sex/sex';
+import { CustomerPipe } from '../pipes/customer.pipes'
 
 // Providers
 import { ToastService } from '../providers/util/toast.service';
+import { GlobalData } from '../providers/GlobalData';
+import { ContactsProvider } from '../providers/contacts';
 
 export const COMPONENTS = [
     AccordionListComponent,
@@ -23,9 +28,13 @@ export const COMPONENTS = [
 export const PIPES = [
   StatusPipe,
   ColorPipe,
-  TimePipe
+  TimePipe,
+  SexPipe,
+  CustomerPipe
 ];
 
 export const PROVIDERS = [
-    ToastService
+    ToastService,
+    GlobalData,
+    ContactsProvider
 ];

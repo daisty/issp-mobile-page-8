@@ -18,9 +18,10 @@ page-internal-address {
         background-color: #f4f4f4;
         #inter{
            width: 100%;
+           height: 222px;
             position: fixed;
             left: 0;
-            // top: 55px;
+            padding-top: 5px;
             z-index: 100;
             background-color: #38c0ff;
             .person-top{
@@ -45,12 +46,15 @@ page-internal-address {
                 }
                 h2{
                     font-size: 21px;
-                  
+                    margin-top: 10px;
                 }
                 .post{
-                    font-size: 18px;
+                    font-size: 16px;
                     line-height: 20px;
-                    margin-top: 5px;
+                    margin-top: 0;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
                     span{
                         padding-left: 10px;
                         
@@ -60,7 +64,7 @@ page-internal-address {
         }
 
         #infoList{
-            margin-top: 234px;
+            margin-top: 222px;
             margin-bottom: 50px;
             .list-ios > .item-block:first-child{
                 border-top: 0 none;
@@ -99,7 +103,12 @@ page-internal-address {
         align-items: center;
         padding: 0;
         margin-bottom: 0;
-
+        .toolbar-background-ios{
+            background: 0;
+        }
+        .toolbar-background-md{
+            background: 0;
+        }
         .toolbar-content-md{
 
             .email-btn{

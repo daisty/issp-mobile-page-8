@@ -4,7 +4,7 @@
     <ion-title id="title-pointer" (click)="show = !show" [ngClass]="{'backActive':tab}">
         {{seleFont || '全部'}}<ion-icon name="arrow-down" class="down-center"></ion-icon>
     </ion-title>
-    <my-back text="返回键" *ngIf="tab" (click)="dismiss()"></my-back>
+    <my-back text="返回首页" *ngIf="tab" (click)="dismiss()"></my-back>
    <ion-buttons end>
       <button ion-button icon-only class="apply" (click)="toPage()">
         申请借款

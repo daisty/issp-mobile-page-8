@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController,ViewController } from 'ionic-angular';
 import { ToastService } from '../../../providers/util/toast.service';
+import { APP_URL } from '../../../config/config';
 
 @IonicPage()
 @Component({
@@ -26,7 +27,7 @@ export class BorrowAuditopinonPage {
   }
   confirm() :void{
     this.paramObj.chargerPass = this.paramObj.chargerPass?'是':'否';
-    this.http.put('phoneApplylend/v1/waitPay/allAudit',this.paramObj)
+    this.http.put(APP_URL+'phoneApplylend/v1/waitPay/allAudit',this.paramObj)
     .then(res => {
       let msg:string;
       if(res.code == 0){
@@ -42,7 +43,7 @@ export class BorrowAuditopinonPage {
               text: '确认',
               handler: () => {
                 if(!res.msg){
-                  this.navCtrl.push('BorrowManagePage');
+                  this.navCtrl.push('BorrowManagePage',{tab:true});
                 }
               }
             }

@@ -7,10 +7,18 @@ page-contacts {
     #contacts{
         background-color: #f4f4f4;
         position: relative;
+        .searchbar-ios{
+            background: #f4f4f4;
+        }
+        .item-divider-md{
+            border-bottom: 0;
+        }
         #contact-list{
+            border-bottom: 1px solid #eee;
             &.item-ios .item-inner:last-child{
                 border-bottom: 0;
             }
+            
         }
         .person{
             font-size: 18px;
@@ -26,17 +34,52 @@ page-contacts {
         #letter{
             width: 5%;
             position: fixed;
-            top: 20%;
+            top: 22%;
             right: 6%;
             z-index: 100;
             text-align: center;
-            p{
+            .indexed-item{
                 font-family: "Arial";
                 font-size: 14px;
                 color: #999;
-                line-height: 5px;
+                transition: all .3s ease-out;
+                margin: 2px 0;
                 cursor: pointer;
+                &.activate {
+                    transform: scale(1.5);
+                    color: #000;
+                }
             }
+        }
+
+        .modal {           
+            top: 50%;
+            left: 50%;
+            z-index: 100;
+            position: fixed;
+        
+            pointer-events: none;
+        
+            width: $modal-size;
+            height: $modal-size;
+            line-height: $modal-size;
+            margin-left: -($modal-size * 0.5);
+            margin-top: -($modal-size * 0.5);
+        
+            color: #fff;
+            font-size: 3em;
+            text-align: center;
+            border-radius: 8px;
+            background-color: rgba(0, 0, 0, 0.52);
+            box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.16);
+        
+            transition: opacity .5s;
+            opacity: 0;
+        
+            &.show {
+                opacity: 1
+            }
+        
         }
 
         .modal {           

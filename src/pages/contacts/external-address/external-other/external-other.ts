@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ToastService } from '../../../../providers/util/toast.service';
+import { CONTACT } from '../../../../config/config';
 
-/**
- * Generated class for the InternalAddressPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
   selector: 'page-external-other',
@@ -16,32 +12,21 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 export class ExternalOther {
 
-  otherItems: any = [
-    {
-      otherNews:'其他关联项目',
-      details:'1461计划'
-    },
-    {
-      otherNews:'联系时间频率',
-      details:'一周一次'
-    },
-    {
-      otherNews:'对外联系信息',
-      details:'我想你永远不会知道'
-    },
-    {
-      otherNews:'录入时间',
-      details:'2017-08-21'
-    }
-  ]
+  id: string;
+  exterData: any = {};
   constructor(
     public navCtrl: NavController, 
-    public navParams: NavParams
+    public navParams: NavParams,
+    public http: ToastService
     ) {
+      this.id = navParams.get('id');
+      this.http.get(CONTACT + `externalcontacts/v1/mobile/findByID/${this.id}`)
+      .then( res =>{
+        this.exterData = res.data;
+      })
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ExternalOther');
   }
 
 }

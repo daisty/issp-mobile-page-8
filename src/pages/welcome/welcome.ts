@@ -1,14 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-import { Login } from '../login/login';
+import { ToastService } from '../../providers/util/toast.service';
 import { Signup } from '../signup/signup';
-/**
- * Generated class for the Welcome page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+import { Storage } from '@ionic/storage';
+import { HOME } from '../../config/config';
+
 @IonicPage()
 @Component({
   selector: 'page-welcome',
@@ -17,7 +13,11 @@ import { Signup } from '../signup/signup';
 export class Welcome {
   rootPage: any;
   items: Array<{ title: string, message?: (any), page?: any }>;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  homeName: any = {};
+  userName:string="admin";
+  empNumer: string;
+  temp_userName:string;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: ToastService, public storage: Storage) {
     this.rootPage = 'Welcome';
     this.items = [
       {
@@ -31,6 +31,7 @@ export class Welcome {
       },
       {
         title:'通讯录',
+        page:'ContactsPage'
       },
       {
         title:'设置',
@@ -42,20 +43,34 @@ export class Welcome {
   itemTapped(event, item) {
     this.navCtrl.push(item.page);
   }
-  // itemSelected(item: string) {
-  //   console.log("Selected Item", item);
-  // }
+
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad Welcome');
+
+    // this.storage.get('userName').then(val =>{
+  
+      // this.temp_userName = val ;
+      this.temp_userName = 'admin' ;
+      if(this.temp_userName){
+        
+        this.http.get(HOME + 'positiondetailuser/v1/userName/userinfo',{userName: this.temp_userName})
+          .then(res => {
+              if(res.code == 0){
+                this.homeName = res.data;
+              }
+          
+          });
+      }
+    // });      
+    
   }
 
   login(){
-   this.navCtrl.push(Login);
+   this.navCtrl.push('LoginPage');
   }
 
   signup(){
-   this.navCtrl.push(Signup, {}, {animate:false});
+   this.navCtrl.push('LoginPage');
   }
 
 }

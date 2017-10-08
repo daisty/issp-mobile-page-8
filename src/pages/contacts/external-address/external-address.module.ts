@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { ExternalAddress } from './external-address';
-// import { ExternalOther } from './ExternalOther/ExternalOther'
+import { SharedModule } from '../../../app/shared.module';
 
 @NgModule({
   declarations: [
@@ -9,6 +9,7 @@ import { ExternalAddress } from './external-address';
   ],
   imports: [
     IonicPageModule.forChild(ExternalAddress),
+    SharedModule
   ],
   exports: [
     ExternalAddress

@@ -16,18 +16,42 @@
   <div id="inter">
     <div class="person-top">
       <ion-avatar class="avatar-head">
-        <img src="assets/imgs/avatar3.png">
-        <ion-icon name="my-avatar" color="energy" class="person"></ion-icon>
+        <img src="assets/imgs/contact_pic.png">
+        <ion-icon name="my-avatar" color="{{detailData.sex | sex}}" class="person"></ion-icon>
       </ion-avatar>
-      <h2>王博文</h2>
-      <p class="post">一线实施体系 <span>产品专员</span></p>
+      <h2>{{detailData.username}}</h2>
+      <p class="post">{{detailData.department}} <span>{{detailData.position}}</span></p>
     </div>
   </div>
   <div id="infoList">
     <ion-list>
-      <ion-item class="item-list" *ngFor="let inforItem of inforItems"> 
-        <span>{{inforItem.tool}}</span>
-        <span>{{inforItem.details}}</span>
+      <ion-item class="item-list"> 
+        <span>电话</span>
+        <span>{{detailData.phone}}</span>
+      </ion-item>
+      <ion-item class="item-list"> 
+        <span>邮箱</span>
+        <span>{{detailData.email}}</span>
+      </ion-item>
+      <ion-item class="item-list"> 
+        <span>员工编号</span>
+        <span>{{detailData.number}}</span>
+      </ion-item>
+      <ion-item class="item-list"> 
+        <span>Q Q</span>
+        <span>{{detailData.qq}}</span>
+      </ion-item>
+      <ion-item class="item-list"> 
+        <span>微信</span>
+        <span>{{detailData.weChat}}</span>
+      </ion-item>
+      <ion-item class="item-list"> 
+        <span>集团号</span>
+        <span>{{detailData.bloc}}</span>
+      </ion-item>
+      <ion-item class="item-list"> 
+        <span>备注</span>
+        <span>{{detailData.remark}}</span>
       </ion-item>
     </ion-list>
   </div>

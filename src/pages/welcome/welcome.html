@@ -6,9 +6,9 @@
     <div id="home-bg"></div>
     <div id="content">
         <div id="profile-info">
-            <img id="avatar-img" src="assets/imgs/avatar4.png">
-            <h2 id="person-name">王博文 <ion-icon name="my-avatar" color="energy" id="person"></ion-icon></h2>
-            <p id="profile-text">IKE00318 <span>一线实施体系</span></p>
+            <img id="avatar-img" src="assets/imgs/usertitle.png">
+            <h2 id="person-name">{{homeName.userName}} <ion-icon name="my-avatar" color="energy" id="person"></ion-icon></h2>
+            <p id="profile-text">{{homeName.empNumer}} <span>{{homeName.hierarchyName}}</span></p>
         </div>
         <ion-list inset>
             <ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
@@ -17,7 +17,7 @@
                 <ion-icon name="my-arrow-right" md="md-my-arrow-right" color="energy" clear item-right></ion-icon>
             </ion-item>
         </ion-list>
-        <button ion-button round block color="danger" class="esc-button">退出当前账号</button>
+        <button ion-button round block color="danger" class="esc-button" (click)="signup()">退出当前账号</button>
     </div>
     
 <!-- <button ion-button block class="marginTop" (click)="signup()">Signup</button>

@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { ToastService } from '../../../providers/util/toast.service';
+import { CONTACT } from '../../../config/config';
+import { CallNumber } from '@ionic-native/call-number';
 
-/**
- * Generated class for the InternalAddressPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
   selector: 'page-internal-address',
@@ -14,48 +11,30 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 })
 export class InternalAddress {
 
-  inforItems: any = [
-    {
-      tool:'电话',
-      details:'13726451844'
-    },
-    {
-      tool:'邮箱',
-      details:'284579518@qq.com'
-    },
-    {
-      tool:'员工编号',
-      details:'IKE000254'
-    },
-    {
-      tool:'Q Q',
-      details:'316546741'
-    },
-    {
-      tool:'微信',
-      details:'274wbw'
-    },
-    {
-      tool:'集团号',
-      details:'233211'
-    },
-    {
-      tool:'备注',
-      details:'有事请打电话'
-    }
-  ]
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
+  id: string;
+  detailData: any = {};
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public http: ToastService,private callNumber: CallNumber) {
+    this.id = navParams.get('id');
+
+    this.http.get(CONTACT + `internalcontacts/v1/mobile/findByID/${this.id}`)
+    .then( res =>{
+      this.detailData = res.data;
+    })
   }
 
 
-  showPrompt() {
+  showPrompt(phone) {
     let prompt = this.alertCtrl.create({
-      title: '13726451844',
+      title: this.detailData.phone,
+      
       buttons: [
         {
           text: '呼叫',
           handler: data => {
-            console.log('Cancel clicked');
+            this.callNumber.callNumber(this.detailData.phone, true)
+              .then(() => console.log('Launched dialer!'))
+              .catch(() => console.log('Error launching dialer'));
           }
         },
         {
@@ -70,7 +49,7 @@ export class InternalAddress {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad InternalAddress');
+    // console.log('ionViewDidLoad InternalAddress');
   }
 
 }

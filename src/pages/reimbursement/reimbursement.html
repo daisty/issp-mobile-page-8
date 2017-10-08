@@ -1,10 +1,12 @@
 
-<ion-header>
-  <ion-navbar color="energy">
+<ion-header> 
+  <ion-navbar color="energy" no-border-bottom>
     <ion-title id="title-pointer" (click)="show = !show">
-        全部<ion-icon name="arrow-down" class="down-center"></ion-icon>
+      {{seleFont || '全部'}}<ion-icon name="arrow-down" class="down-center"></ion-icon>
     </ion-title> 
-   <ion-buttons end class="apply" (click)="apply()">申请报销</ion-buttons>
+   <ion-buttons end>
+     <button ion-button class="apply" (click)="apply()">申请报销</button> 
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -14,18 +16,19 @@
   <div id="under-model" *ngIf="show"></div>
   <div id="select-all" *ngIf="show">
     <ion-list>
-      <ion-item *ngFor="let item of items" [ngStyle]="setStyles()" (click)="show = !show">{{item.value}}</ion-item>
+      <ion-item *ngFor="let item of items; let i = index" [ngClass]="{'active-child':i == index}" (click)="selectFilter(i, item.value)">{{item.value}}</ion-item>
     </ion-list>
   </div>
   <div id="status-list">
     <ion-list>
-      <ion-item *ngFor="let statu of status">
+      <ion-item *ngFor="let statu of statusButton" (click)="toDetail(statu.currentStatus)">
           <h3 class="title-name">{{statu.nameWipe}}</h3>
           <p class="happen">{{statu.wipeTime}}</p>
           <div class="time-date" item-right>
-              <span class="new-time">{{statu.date}}</span>
+              <p class="new-time">{{statu.date}}</p>
               <button ion-button color="{{statu.color}}" round>{{statu.currentStatus}}</button>
           </div>
+          
       </ion-item>
     </ion-list>
   </div>

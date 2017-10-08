@@ -1,152 +1,28 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { ToastService } from '../../../providers/util/toast.service';
+import { CONTACT } from '../../../config/config';
 
-/**
- * Generated class for the InternalAddressPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
   selector: 'page-external-address',
   templateUrl: 'external-address.html'
 })
-
-// export class BasicPage {
-//   constructor(public modalCtrl: ModalController) { }
-
-//   openModal(characterNum) {
-
-//     let modal = this.modalCtrl.create(ExternalAddress, characterNum);
-//     modal.present();
-//   }
-// }
-
-// @Component({
-//   template: `
-// <ion-header>
-//   <ion-toolbar>
-//     <ion-title>
-//       Description
-//     </ion-title>
-//     <ion-buttons start>
-//       <button ion-button (click)="dismiss()">
-//         <span ion-text color="primary" showWhen="ios">Cancel</span>
-//         <ion-icon name="md-close" showWhen="android, windows"></ion-icon>
-//       </button>
-//     </ion-buttons>
-//   </ion-toolbar>
-// </ion-header>
-
-// <ion-content>
-//   <ion-list>
-//       <ion-item>
-//         <ion-avatar item-start>
-//           <img src="{{character.image}}">
-//         </ion-avatar>
-//         <h2>{{character.name}}</h2>
-//         <p>{{character.quote}}</p>
-//       </ion-item>
-
-//       <ion-item *ngFor="let item of character['items']">
-//         {{item.title}}
-//         <ion-note item-end>
-//           {{item.note}}
-//         </ion-note>
-//       </ion-item>
-//   </ion-list>
-// </ion-content>
-// `
-// })
-// export class ModalContentPage {
-//   character;
-
-//   constructor(
-//     public platform: Platform,
-//     public params: NavParams,
-//     public viewCtrl: ViewController
-//   ) {
-//     var characters = [
-//       {
-//         name: 'Gollum',
-//         quote: 'Sneaky little hobbitses!',
-//         image: 'assets/img/avatar-gollum.jpg',
-//         items: [
-//           { title: 'Race', note: 'Hobbit' },
-//           { title: 'Culture', note: 'River Folk' },
-//           { title: 'Alter Ego', note: 'Smeagol' }
-//         ]
-//       },
-//       {
-//         name: 'Frodo',
-//         quote: 'Go back, Sam! I\'m going to Mordor alone!',
-//         image: 'assets/img/avatar-frodo.jpg',
-//         items: [
-//           { title: 'Race', note: 'Hobbit' },
-//           { title: 'Culture', note: 'Shire Folk' },
-//           { title: 'Weapon', note: 'Sting' }
-//         ]
-//       },
-//       {
-//         name: 'Samwise Gamgee',
-//         quote: 'What we need is a few good taters.',
-//         image: 'assets/img/avatar-samwise.jpg',
-//         items: [
-//           { title: 'Race', note: 'Hobbit' },
-//           { title: 'Culture', note: 'Shire Folk' },
-//           { title: 'Nickname', note: 'Sam' }
-//         ]
-//       }
-//     ];
-//     this.character = characters[this.params.get('charNum')];
-//   }
-
-//   dismiss() {
-//     this.viewCtrl.dismiss();
-//   }
-// }
 export class ExternalAddress {
 
-  inforItems: any = [
-    {
-      tool:'电话',
-      details:'13726451844'
-    },
-    {
-      tool:'邮箱',
-      details:'284579518@qq.com'
-    },
-    {
-      tool:'员工编号',
-      details:'IKE000254'
-    },
-    {
-      tool:'单位',
-      details:'阿里巴巴'
-    },
-    {
-      tool:'主要负责',
-      details:'项目管理'
-    },
-    {
-      tool:'地区',
-      details:'广州'
-    },
-    {
-      tool:'填写人',
-      details:'黑玫瑰'
-    },
-    {
-      tool:'备注',
-      details:'有事请打电话'
-    }
-  ]
+  id: string;
+  exterData: any = {};
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams, 
     public alertCtrl: AlertController,
+    public http: ToastService
     ) {
+      this.id = navParams.get('id');
+      this.http.get(CONTACT + `externalcontacts/v1/mobile/findByID/${this.id}`)
+      .then( res =>{
+        this.exterData = res.data;
+      })
   }
 
   // openModal(characterNum) {
@@ -157,7 +33,7 @@ export class ExternalAddress {
 
   showPrompt() {
     let prompt = this.alertCtrl.create({
-      title: '13726451844',
+      title: this.exterData.phone,
       buttons: [
         {
           text: '呼叫',
@@ -176,11 +52,11 @@ export class ExternalAddress {
     prompt.present();
   }
 
-  itemOther(){
-    this.navCtrl.push('ExternalOther');
+  itemOther(id:string){
+    this.navCtrl.push('ExternalOther',{id:id});
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ExternalAddress');
+    // console.log('ionViewDidLoad ExternalAddress');
   }
 
 }

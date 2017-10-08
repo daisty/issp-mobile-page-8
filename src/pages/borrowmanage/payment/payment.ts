@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { ToastService } from '../../../providers/util/toast.service';
+import { APP_URL } from '../../../config/config';
 
 @IonicPage()
 @Component({
   selector: 'page-payment',
   templateUrl: 'payment.html',
 })
-export class Payment { 
+export class Paymentss { 
   paramObj :any = {id:'1'};
   payList :Array<''>;
   constructor(
@@ -20,7 +21,7 @@ export class Payment {
   }
 
   ionViewDidLoad() {
-    this.http.get('applylend/v1/listAccountOrigin')
+    this.http.get(APP_URL + 'applylend/v1/listAccountOrigin')
     .then(res => {
       if(res.code == 0){
         this.payList = res.data;
@@ -30,7 +31,7 @@ export class Payment {
 
   successAlert(){
     let msg;
-    this.http.put('phoneApplylend/v1/editPay',this.paramObj)
+    this.http.put(APP_URL+'phoneApplylend/v1/editPay',this.paramObj)
     .then(res => {
       if(res.code == 0){
         msg = '付款成功';
@@ -44,7 +45,7 @@ export class Payment {
             {
               text: '确认',
               handler: () => {
-                if(!res.msg)this.navCtrl.push('BorrowManagePage');
+                if(!res.msg)this.navCtrl.push('BorrowManagePage',{tab:true});
               }
             }
           ]

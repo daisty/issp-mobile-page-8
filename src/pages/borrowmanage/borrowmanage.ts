@@ -1,7 +1,8 @@
 import { Component,ViewChild  } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController ,Content} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController ,Content,Platform } from 'ionic-angular';
 import { Welcome } from '../welcome/welcome';
 import { ToastService } from '../../providers/util/toast.service';
+import { APP_URL } from '../../config/config';
 
 @IonicPage()
 @Component({
@@ -48,11 +49,20 @@ export class BorrowManagePage {
   ];
   @ViewChild(Content) content: Content;
   private hideBtn :boolean = true;//控制 上拉加载 true 为显示
-  constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl: ViewController,public http:ToastService) {
+  constructor(
+    public navCtrl: NavController,
+     public navParams: NavParams,
+     public viewCtrl: ViewController,
+     public http:ToastService,
+     public platform: Platform
+     ) {
     this.tab = navParams.get('tab');
   }
   ionViewDidLoad() {
-    this.http.get('phoneApplylend/v1/listAll',{lendPhoneSelectStatus:this.statusL,page:this.pageNum})
+    this.platform.registerBackButtonAction(()=> {
+      
+    })
+    this.http.get(APP_URL+'phoneApplylend/v1/listAll',{lendPhoneSelectStatus:this.statusL,page:this.pageNum})
     .then(res => {
       this.statusList = res.data;
     });
@@ -67,7 +77,7 @@ export class BorrowManagePage {
     this.statusList = [];
     if(val){
       this.pageNum = 1;
-      this.http.get('phoneApplylend/v1/listAll',{lendPhoneSelectStatus:val,page:1})
+      this.http.get(APP_URL+'phoneApplylend/v1/listAll',{lendPhoneSelectStatus:val,page:1})
       .then(res => {
         if(res.data){
           this.statusList = res.data;
@@ -76,14 +86,6 @@ export class BorrowManagePage {
         }
       });
     }
-    // if (val && val.trim() != '') {
-    //   this.statusList = this.statusList.filter((item) => { 
-    //     if(val == '全部')return item;
-    //     if(item.currentStatus == val){
-    //       return item;
-    //     }
-    //   })
-    // }
   }
   toPage() {
     this.navCtrl.push('ApplyborrowmoneyPage');
@@ -138,7 +140,7 @@ export class BorrowManagePage {
   doInfinite(infiniteScroll) {
     setTimeout(() => {
       this.pageNum++;
-      this.http.get('phoneApplylend/v1/listAll',{lendPhoneSelectStatus:this.statusL,page:this.pageNum})
+      this.http.get(APP_URL+'phoneApplylend/v1/listAll',{lendPhoneSelectStatus:this.statusL,page:this.pageNum})
       .then(res => {
         let data = res.data;
         if(res.code == 0){

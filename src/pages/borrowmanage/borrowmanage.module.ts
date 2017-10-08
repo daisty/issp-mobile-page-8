@@ -10,8 +10,7 @@ import { SharedModule } from '../../app/shared.module';
   ],
   imports: [
     IonicPageModule.forChild(BorrowManagePage),
-    SharedModule,
-    BorrowDetailPageModule
+    SharedModule
   ],
   exports: [
     BorrowManagePage

@@ -2,21 +2,21 @@
 <ion-header>
   <ion-navbar  color="energy" text-center>
     <ion-title>通讯录</ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only>
+    <ion-buttons end >
+      <button ion-button icon-only (click)="showSearch = !showSearch">
         <ion-icon name='search'></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
   <ion-toolbar no-border-top no-border-bottom color="white">
     <ion-segment [(ngModel)]="pet" id="toolbar">
-      <ion-segment-button value="internal">
+      <ion-segment-button value="internal" (click)="come='内部通讯录'">
         内部通讯录
       </ion-segment-button>
-      <ion-segment-button value="external">
+      <ion-segment-button value="external" (click)="come='外部通讯录'">
         外部通讯录
       </ion-segment-button>
-      <ion-segment-button value="business">
+      <ion-segment-button value="business" (click)="come='商务通讯录'">
         商务通讯录
       </ion-segment-button>
     </ion-segment>
@@ -25,20 +25,21 @@
 
 
 <ion-content id="contacts" (ionScroll)="onScroll()">
+<ion-searchbar (ionInput)="getItems($event)" placeholder="搜索用户名" *ngIf="showSearch"></ion-searchbar>
   <div [ngSwitch]="pet">
     <!-- 内部通讯录 -->
     <div *ngSwitchCase="'internal'">
-      <ion-item-group *ngFor="let item of contacts" #IonItemGroup>
-        <ion-item-divider color="bgColor" sticky index-key="item.belong">
-          <ion-label>A</ion-label>
+      <ion-item-group *ngFor="let item of innerContacts" #IonItemGroup>
+        <ion-item-divider color="bgColor" sticky index-key="item.belong" *ngIf="item.keyLetter">
+          <ion-label>{{item.groupName}}</ion-label>
         </ion-item-divider>
-        <ion-item-sliding #slidingItem>
+        <ion-item-sliding *ngFor="let i of item.contacts" (click)="openInternalPage(i.id)"#slidingItem>
           <ion-item id="contact-list">
             <ion-thumbnail item-start>
-              <img src="assets/imgs/avatar4.png">
+              <img src="assets/imgs/contact_pic.png">
             </ion-thumbnail>
-            <h2>{{item.username}} <ion-icon name="my-avatar" color="{{item.sex | color}}" class="person"></ion-icon></h2>
-            <p>{{item.department}} <span>{{item.position}}</span></p>    
+            <h2>{{i.username}} <ion-icon name="my-avatar" color="{{i.sex | sex}}" class="person"></ion-icon></h2>
+            <p>{{i.department}} <span>{{i.position}}</span></p>    
           </ion-item>
         </ion-item-sliding>        
       </ion-item-group> 
@@ -47,46 +48,45 @@
 
     <!-- 外部通讯录 -->
     <div *ngSwitchCase="'external'">
-        
+      <ion-item-group *ngFor="let item of exterContacts" #IonItemGroup>
+        <ion-item-divider color="bgColor" sticky index-key="item.belong" *ngIf="item.keyLetter">
+          <ion-label>{{item.groupName}}</ion-label>
+        </ion-item-divider>
+        <ion-item-sliding *ngFor="let i of item.contacts" (click)="openOuternalPage(i.id)"#slidingItem>
+          <ion-item id="contact-list">
+            <ion-thumbnail item-start>
+              <img src="assets/imgs/contact_pic.png">
+            </ion-thumbnail>
+            <h2>{{i.username}} <ion-icon name="my-avatar" color="{{i.sex | sex}}" class="person"></ion-icon></h2>
+            <p>{{i.project}} <span>{{i.position}}</span></p>    
+          </ion-item>
+        </ion-item-sliding>        
+      </ion-item-group>
     </div>
+    <!-- 外部通讯录 -->
 
       <!-- 商务通讯录 -->
       <div *ngSwitchCase="'business'">
-          <ion-item-group>
-            <ion-item-divider color="bgColor" >A</ion-item-divider>
-            <ion-item *ngFor="let business of businesses" id="contact-list" (click)="openBusinessPage(business)">
+        <ion-item-group *ngFor="let item of comContacts" #IonItemGroup>
+          <ion-item-divider color="bgColor" sticky index-key="item.belong" *ngIf="item.keyLetter">
+            <ion-label>{{item.groupName}}</ion-label>
+          </ion-item-divider>
+          <ion-item-sliding *ngFor="let i of item.contacts" (click)="openBusinessPage(i.id)"#slidingItem>
+            <ion-item id="contact-list">
               <ion-thumbnail item-start>
-                <img [src]="business.imageUrl">
+                <img src="assets/imgs/contact_pic.png">
               </ion-thumbnail>
-              <h2>{{business.contactName}} <ion-icon name="my-avatar" color="energy" class="person"></ion-icon></h2>
-              <p>{{business.branch}} <span>{{business.post}}</span></p>    
+              <h2>{{i.customerName}} <ion-icon name="my-avatar" color="{{i.sex | sex}}" class="person"></ion-icon></h2>
+              <p>{{i.customerLevelName}} <span>{{i.customerStatus | customer}}</span></p>    
             </ion-item>
-          </ion-item-group>
-          <ion-item-group>
-            <ion-item-divider color="bgColor" >B</ion-item-divider>
-            <ion-item *ngFor="let business of businesses" (click)="openBusinessPage(business)">
-              <ion-thumbnail item-start>
-                <img [src]="business.imageUrl">
-              </ion-thumbnail>
-              <h2>{{business.contactName}} <ion-icon name="my-avatar" color="womenColor" class="person"></ion-icon></h2>
-              <p>{{business.branch}} <span>{{business.post}}</span></p>    
-            </ion-item>
-          </ion-item-group>
-          <ion-item-group>
-              <ion-item-divider color="bgColor">C</ion-item-divider>
-              <ion-item *ngFor="let business of businesses" (click)="openBusinessPage(business)">
-                <ion-thumbnail item-start>
-                  <img [src]="business.imageUrl">
-                </ion-thumbnail>
-                <h2>{{business.contactName}} <ion-icon name="my-avatar" color="energy" class="person"></ion-icon></h2>
-                <p>{{business.branch}} <span>{{business.post}}</span></p>    
-              </ion-item>
-            </ion-item-group>
-        </div>
+          </ion-item-sliding>        
+        </ion-item-group>
+      </div>
+      <!-- 商务通讯录 -->
   </div>
 
-  <div id="letter">
-    <p *ngFor="let letter of indexes; let i = index">{{letter}}</p>
+  <div id="letter" #IndexedMenu>
+    <p class="indexed-item" [class.activate]="letter === index" *ngFor="let letter of indexes; let i = index" (click)="selectIndex(i)">{{letter}}</p>
   </div>
   <div class="modal"
     [class.show]="showModal">
@@ -96,4 +96,5 @@
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
+
 </ion-content>

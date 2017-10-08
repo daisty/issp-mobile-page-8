@@ -3,10 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
-
+import { Camera } from '@ionic-native/camera';//获取摄像头
+import { Geolocation } from '@ionic-native/geolocation';//获取定位
+import { ImagePicker } from '@ionic-native/image-picker';//获取图片
+import { IonicStorageModule } from '@ionic/storage';
+import { CallNumber } from '@ionic-native/call-number';//拨打电话号码
 
 import { Welcome } from '../pages/welcome/welcome';
-import { Login } from '../pages/login/login';
+import { LoginPageModule } from '../pages/login/login.module';
 import { Signup } from '../pages/signup/signup';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
@@ -16,8 +20,9 @@ import { SettingPage } from '../pages/setting/setting';
 import { SettingPageModule } from '../pages/setting/setting.module';
 import { ReimbursementPage } from '../pages/reimbursement/reimbursement';
 import { ReimbursementPageModule } from '../pages/reimbursement/reimbursement.module';
-import { ApplyreimbursementPage } from '../pages/applyreimbursement/applyreimbursement';
 import { SharedModule } from './shared.module';
+//通讯录
+import { ContactsPageModule } from '../pages/contacts/contacts.module';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -36,41 +41,52 @@ import { Contacts } from '../providers/contacts';
 @NgModule({
   declarations: [
     MyApp,
-    Home
-    
-  ],
-
+    Welcome,
+    Signup,
+    AboutPage,
+    ContactPage,
+    HomePage,
+    TabsPage
+  ], 
   imports: [
     HttpModule,
     BrowserModule,
     IonicModule.forRoot(MyApp,{
       backButtonText:'',
     }),
+    IonicStorageModule.forRoot({
+      name: '__mydb',
+         driverOrder: ['indexeddb', 'sqlite', 'websql']
+    }),
     SettingPageModule,
     ReimbursementPageModule,
 
     MultiPickerModule ,
-    SharedModule
-    BorrowManagePageModule,
-    BorrowDetailPageModule,
-    ApplyborrowmoneyPageModule,
-    AccordionListPageModule,
+    SharedModule,
     ContactsPageModule,
-    HttpModule
+    LoginPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    Home
-
+    Welcome,
+    Signup,
+    AboutPage,
+    ContactPage,
+    HomePage,
+    TabsPage,
+    SettingPage,
+    ReimbursementPage,
   ],
   providers: [
     StatusBar,
     PROVIDERS,
     SplashScreen,
+    ImagePicker,
+    Camera,
+    CallNumber,
+    Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ToastService,
-    Contacts
   ]
 })
 export class AppModule {}

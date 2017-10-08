@@ -1,49 +1,72 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-// import $ from 'jquery';
-
 import 'rxjs/add/operator/toPromise';
+import  {APP_URL,USER_URL,CONTACT,HOME} from '../../config/config';
+import { Storage } from '@ionic/storage';
+import { GlobalData } from '../GlobalData';
 
 @Injectable()
 export class ToastService {
   private rs:any = {msg:'?'};
-  private token:string = '98583469460d423fa85a04f0d4ba1e64.3232235640.1505879087257';
-
   constructor(
-      public http:Http
+      public http:Http,
+      public storage: Storage,
+      public globalData :GlobalData
 ) { 
-    
+  
 }
-
    get(url:any,option?:any) {
-       let headers = new Headers({
-        'userToken':this.token});
-       return this.http.get('/api/'+ url + this.toQueryString(option),new RequestOptions({headers: headers}))
+      let headers = this.setHeader();
+       return this.http.get(url + this.toQueryString(option),new RequestOptions({headers: headers}))
         .toPromise()
         .then(res => this.handleSuccess(res.json()))
         .catch(error => this.handleError(error));
    }
-
-   public post(url: string, paramObj: any) {
-     let headers = new Headers({
-         'Content-Type':"application/x-www-form-urlencoded; charset=UTF-8",
-         'userToken':this.token});
-     return this.http.post('/api/'+ url, this.toBodyString(paramObj), new RequestOptions({headers: headers}))
+   public getUser(url: string) {
+      let headers = new Headers({
+         'Content-Type':"application/x-www-form-urlencoded; charset=UTF-8"});
+        return this.http.post( USER_URL + url, new RequestOptions({headers: headers}))
+       .toPromise()
+       .then(res => {
+        let result = res.json();
+        if(result){
+            if (result.code == 0) {
+              return result;
+            }else{
+                this.rs.msg = result.msg;
+                this.rs.code = result.code;
+              return this.rs;
+            }
+        }
+        })
+       .catch(error => this.handleError(error));
+   }
+   public post(url: string, paramObj?: any) {
+     let headers = this.setHeader();
+     return this.http.post(url,  this.toBodyString(paramObj), new RequestOptions({headers: headers}))
        .toPromise()
        .then(res => this.handleSuccess(res.json()))
        .catch(error => this.handleError(error));
    }
-
    public put(url: string, paramObj?: any) {
+     let token = this.globalData.token;
+
      let headers = new Headers({
          'Content-Type':"application/x-www-form-urlencoded; charset=UTF-8",
-         'userToken':this.token});
-     return this.http.put('/api/'+ url,this.toBodyString(paramObj), new RequestOptions({headers: headers}))
+         'userToken':token});
+     return this.http.put(url,this.toBodyString(paramObj), new RequestOptions({headers: headers}))
        .toPromise()
        .then(res => this.handleSuccess(res.json()))
        .catch(error => this.handleError(error));
    }
-
+   
+   private setHeader() {
+     let token = this.globalData.token;
+     let headers = new Headers({
+         'Content-Type':"application/x-www-form-urlencoded; charset=UTF-8",
+         'userToken':token});
+      return headers;
+   }
    //处理成功之后数据
    private handleSuccess(result) {
      if(result){

@@ -24,7 +24,7 @@
 // Components
 import { AccordionListComponent } from '../components/accordion-list/accordion-list';
 import { ToastService } from '../providers/util/toast.service';
-import { Contacts } from '../providers/contacts';
+import { ContactsProvider } from '../providers/contacts';
 
 // Pipes
 import { ColorPipe } from '../pipes/color/color';
@@ -47,7 +47,7 @@ export const PIPES = [
 
 export const PROVIDERS = [
   ToastService,
-  Contacts
+  ContactsProvider
   // AlertService,
   // ToastService,
   // AppState,

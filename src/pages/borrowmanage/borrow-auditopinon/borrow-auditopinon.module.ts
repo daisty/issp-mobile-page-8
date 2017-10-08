@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { BorrowAuditopinonPage } from './borrow-auditopinon';
 import { SharedModule } from '../../../app/shared.module';
-import { PROVIDERS } from '../../../app/imports';
 
 @NgModule({
   declarations: [
@@ -15,6 +14,6 @@ import { PROVIDERS } from '../../../app/imports';
   exports: [
     BorrowAuditopinonPage
   ],
-  providers: [PROVIDERS]
+  providers: []
 })
 export class BorrowAuditopinonPageModule {}

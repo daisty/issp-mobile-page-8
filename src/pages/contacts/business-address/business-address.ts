@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { ToastService } from '../../../providers/util/toast.service';
+import { CONTACT } from '../../../config/config';
 
-/**
- * Generated class for the InternalAddressPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
   selector: 'page-business-address',
@@ -15,51 +11,25 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 
 export class BusinessAddress {
 
-  inforItems: any = [
-    {
-      tool:'电话',
-      details:'13726451844'
-    },
-    {
-      tool:'邮箱',
-      details:'284579518@qq.com'
-    },
-    {
-      tool:'客户来源',
-      details:'推荐'
-    },
-    {
-      tool:'关系程度',
-      details:'很好'
-    },
-    {
-      tool:'重要性级别',
-      details:'中'
-    },
-    {
-      tool:'地区',
-      details:'广州'
-    },
-    {
-      tool:'第一介绍人',
-      details:'孟小宝'
-    },
-    {
-      tool:'备注',
-      details:'有事请打电话'
-    }
-  ]
+  id: string;
+  businessData: any = {};
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams, 
     public alertCtrl: AlertController,
+    public http: ToastService
     ) {
+      this.id = navParams.get('id');
+      this.http.get(CONTACT + `commercecontacts/v1/mobile/findByID/${this.id}`,{})
+        .then( res =>{
+          this.businessData = res.data;
+        })
   }
 
 
   showPrompt() {
     let prompt = this.alertCtrl.create({
-      title: '13726451844',
+      title: this.businessData.tel,
       buttons: [
         {
           text: '呼叫',
@@ -78,11 +48,11 @@ export class BusinessAddress {
     prompt.present();
   }
 
-  businessOther(){
-    this.navCtrl.push('BusinessOther');
+  businessOther(id:string){
+    this.navCtrl.push('BusinessOther', {id:id});
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad BusinessAddress');
+    // console.log('ionViewDidLoad BusinessAddress');
   }
 
 }

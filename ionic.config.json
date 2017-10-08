@@ -1,14 +1,26 @@
 {
   "name": "issp-mobile-page-8",
-  "app_id": "",
+  "app_id": "43d8c7d3",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
   },
   "proxies": [
-    {  
-      "path": "/api",  
-      "proxyUrl": "http://192.168.0.65:51310"  
+    {
+      "path": "/contact",
+      "proxyUrl": "http://192.168.0.62:51310"
+    },
+    {
+      "path": "/user",
+      "proxyUrl": "http://192.168.0.54:51702"
+    },
+    {
+      "path": "/home",
+      "proxyUrl": "http://192.168.0.54:51302"
+    },
+    {
+      "path": "/",
+      "proxyUrl": "http://192.168.0.54:51216"
     }
-  ]  
+  ]
 }

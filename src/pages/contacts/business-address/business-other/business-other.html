@@ -11,10 +11,30 @@
 <ion-content id="otherInfo">
   <div id="infoOther">
     <ion-list>
-      <ion-item class="item-list" *ngFor="let otherItem of otherItems"> 
-        <span>{{otherItem.otherNews}}</span>
-        <span>{{otherItem.details}}</span>
-      </ion-item>  
+      <ion-item class="item-list"> 
+        <span>岗位</span>
+        <span>{{businessData.workPosition}}</span>
+      </ion-item>
+      <ion-item class="item-list"> 
+        <span>职权</span>
+        <span>{{businessData.workRight}}</span>
+      </ion-item> 
+      <ion-item class="item-list"> 
+        <span>职级</span>
+        <span>{{businessData.workLevel}}</span>
+      </ion-item> 
+      <ion-item class="item-list"> 
+        <span>微信</span>
+        <span>{{businessData.weChart}}</span>
+      </ion-item>
+      <ion-item class="item-list"> 
+        <span>Q Q</span>
+        <span>{{businessData.qq}}</span>
+      </ion-item> 
+      <ion-item class="item-list"> 
+        <span>座机</span>
+        <span>{{businessData.phone}}</span>
+      </ion-item>    
     </ion-list>
   </div>
 </ion-content>

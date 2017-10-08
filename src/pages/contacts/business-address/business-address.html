@@ -4,7 +4,7 @@
   <ion-navbar color="energy">
     <ion-buttons end>
       <button ion-button>
-        在职
+        VIP
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -16,20 +16,48 @@
   <div id="inter">
     <div class="person-top">
       <ion-avatar class="avatar-head">
-        <img src="assets/imgs/avatar3.png">
-        <ion-icon name="my-avatar" color="energy" class="person"></ion-icon>
+        <img src="assets/imgs/contact_pic.png">
+        <ion-icon name="my-avatar" color="{{businessData.sex | sex}}" class="person"></ion-icon>
       </ion-avatar>
-      <h2>安拉琪</h2>
-      <p class="post">001 <span>潜在客户</span></p>
+      <h2>{{businessData.customerName}}</h2>
+      <p class="post">{{businessData.customerLevelName}} <span>{{businessData.customerStatus | customer}}</span></p>
     </div>
   </div>
   <div id="infoList">
     <ion-list>
-      <ion-item class="item-list" *ngFor="let inforItem of inforItems"> 
-        <span>{{inforItem.tool}}</span>
-        <span>{{inforItem.details}}</span>
+      <ion-item class="item-list"> 
+        <span>电话</span>
+        <span>{{businessData.phone}}</span>
       </ion-item>
-      <ion-item (click)="businessOther()">
+      <ion-item class="item-list"> 
+        <span>邮箱</span>
+        <span>{{businessData.cusEmail}}</span>
+      </ion-item>
+      <ion-item class="item-list"> 
+        <span>客户来源</span>
+        <span>{{businessData.origin}}</span>
+      </ion-item>
+      <ion-item class="item-list"> 
+        <span>关系程度</span>
+        <span>{{businessData.relation}}</span>
+      </ion-item>
+      <ion-item class="item-list"> 
+        <span>重要性级别</span>
+        <span>{{businessData.customerType | customer}}</span>
+      </ion-item>
+      <ion-item class="item-list"> 
+        <span>地区</span>
+        <span>{{businessData.area}}</span>
+      </ion-item>
+      <ion-item class="item-list"> 
+        <span>第一介绍人</span>
+        <span>{{businessData.introducer}}</span>
+      </ion-item>
+      <ion-item class="item-list"> 
+        <span>备注</span>
+        <span>{{businessData.remark}}</span>
+      </ion-item>
+      <ion-item (click)="businessOther(businessData.id)">
         其他
         <ion-icon name="my-arrow-right" md="md-my-arrow-right" color="lightprimary" clear item-right class="right-arraw"></ion-icon>
       </ion-item>  

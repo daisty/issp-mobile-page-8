@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ToastService } from '../../../../providers/util/toast.service';
+import { CONTACT } from '../../../../config/config';
 
-/**
- * Generated class for the InternalAddressPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
   selector: 'page-business-other',
@@ -15,41 +11,24 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 
 export class BusinessOther {
-
-  otherItems: any = [
-    {
-      otherNews:'岗位',
-      details:'项目经理'
-    },
-    {
-      otherNews:'职权',
-      details:'管理'
-    },
-    {
-      otherNews:'职级',
-      details:'管理层'
-    },
-    {
-      otherNews:'微信',
-      details:'20170821'
-    },
-    {
-      otherNews:'Q Q',
-      details:'2017082123'
-    },
-    {
-      otherNews:'座机',
-      details:'020-2342-3214'
-    }
-  ]
+  id:string;
+  businessData: any = {};
   constructor(
     public navCtrl: NavController, 
-    public navParams: NavParams
+    public navParams: NavParams,
+    public http: ToastService
     ) {
+      
+      this.id = navParams.get('id');
+      this.http.get(CONTACT + `commercecontacts/v1/mobile/findByID/${this.id}`,{})
+        .then( res =>{
+          this.businessData = res.data;
+        })
+
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad BusinessOther');
+    // console.log('ionViewDidLoad BusinessOther');
   }
 
 }
