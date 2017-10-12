@@ -49,6 +49,7 @@ export class BorrowManagePage {
   ];
   @ViewChild(Content) content: Content;
   private hideBtn :boolean = true;//控制 上拉加载 true 为显示
+
   constructor(
     public navCtrl: NavController,
      public navParams: NavParams,
@@ -60,7 +61,7 @@ export class BorrowManagePage {
   }
   ionViewDidLoad() {
     this.platform.registerBackButtonAction(()=> {
-      
+
     })
     this.http.get(APP_URL+'phoneApplylend/v1/listAll',{lendPhoneSelectStatus:this.statusL,page:this.pageNum})
     .then(res => {
@@ -90,7 +91,6 @@ export class BorrowManagePage {
   toPage() {
     this.navCtrl.push('ApplyborrowmoneyPage');
   }
-   
   goDetail(value:string,id:string) {
     let name :string;
     switch(value){

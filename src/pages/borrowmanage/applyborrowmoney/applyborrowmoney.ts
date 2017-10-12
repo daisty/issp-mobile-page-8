@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController,ActionSheetController  } from 'ionic-angular';
 import { ToastService } from '../../../providers/util/toast.service';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Geolocation } from '@ionic-native/geolocation';
 import { ImagePicker } from '@ionic-native/image-picker';//获取图片
 import { APP_URL } from '../../../config/config';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+
 
 @IonicPage()
 @Component({
@@ -21,6 +23,7 @@ export class ApplyborrowmoneyPage {
   secondList: any = [];
   thirdList: any = [];
   explaisList: any= [];//说明
+  bigImg :string;
   croSrc :string;
   Iamges:any = [
     {
@@ -35,6 +38,7 @@ export class ApplyborrowmoneyPage {
       id: 3,
       url: 'assets/imgs/userImage2.png'
     }
+
   ]
   options: CameraOptions = {
     quality: 100,
@@ -49,7 +53,10 @@ export class ApplyborrowmoneyPage {
     public alertCtrl: AlertController,
     private camera: Camera,
     private geolocation: Geolocation,
-    private imagePicker: ImagePicker
+    private imagePicker: ImagePicker,
+    public actionSheetCtrl: ActionSheetController 
+
+
   )
      {
   }
@@ -77,11 +84,9 @@ export class ApplyborrowmoneyPage {
     }
     
     this.geolocation.getCurrentPosition().then((resp) => {
-        // resp.coords.latitude
-        console.log("经度："+ resp.coords.latitude+','+'纬度：'+resp.coords.longitude);
         let confirm = this.alertCtrl.create({
           title: '消息提示',
-          message: "经度："+ resp.coords.latitude,
+          message: "纬度："+ resp.coords.latitude+ ',' + '经度' + resp.coords.longitude,
           buttons: [
               {
                 text: '确认',
@@ -146,6 +151,49 @@ export class ApplyborrowmoneyPage {
     }
   }
   addImage() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title:'选择照片形式',
+      buttons: [
+        {
+          text: '拍摄',
+          handler: () => {
+            this.camera.getPicture(this.options).then((imageData) => {
+              let b:any = {id:this.Iamges.length,url:''};
+              b.url = 'data:image/png;base64,'+imageData;
+              this.Iamges.push(b);
+            });
+          }
+        },{
+          text: '从手机相册选择',
+          handler: () => {
+            var opt = { maximumImagesCount:9,outputType:0 };
+            this.imagePicker.getPictures(opt).then((results)=>{
+              for (var i = 0; i < results.length; i++) {
+                let b:any = {id:this.Iamges.length,url:''};
+                b.url = results[i];
+                this.Iamges.push(b);
+              }  
+            });
+          }
+        },{
+          text: '取消',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    })
+    actionSheet.present();
+  }
+  
+  showBig(url:string){
+    if(url){
+      this.bigImg = url;
+      console.log(this.bigImg)
+    }
+  
+
     let o:any = {id:this.Iamges.length,url:'assets/imgs/userImage2.png'};
     
     // this.camera.getPicture(this.options).then((imageData) => {

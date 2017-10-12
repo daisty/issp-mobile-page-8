@@ -9,9 +9,11 @@ import { ImagePicker } from '@ionic-native/image-picker';//获取图片
 import { IonicStorageModule } from '@ionic/storage';
 import { CallNumber } from '@ionic-native/call-number';//拨打电话号码
 
-import { Welcome } from '../pages/welcome/welcome';
+
+import { WelcomeModule } from '../pages/welcome/welcome.module';
 import { LoginPageModule } from '../pages/login/login.module';
-import { Signup } from '../pages/signup/signup';
+
+
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
@@ -21,8 +23,6 @@ import { SettingPageModule } from '../pages/setting/setting.module';
 import { ReimbursementPage } from '../pages/reimbursement/reimbursement';
 import { ReimbursementPageModule } from '../pages/reimbursement/reimbursement.module';
 import { SharedModule } from './shared.module';
-//通讯录
-import { ContactsPageModule } from '../pages/contacts/contacts.module';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -33,16 +33,13 @@ import { PROVIDERS } from './imports';
 //通讯录
 import { ContactsPageModule } from '../pages/contacts/contacts.module';
 import { ToastService } from '../providers/util/toast.service';
-import { HttpModule } from '@angular/http';
-import { Contacts } from '../providers/contacts';
+import { ContactsProvider } from '../providers/contacts';
 
-// modals
-// import { ExternalAddress as  ModalContentPage } from '../pages/contacts/external-address/external-address';
 @NgModule({
   declarations: [
     MyApp,
-    Welcome,
-    Signup,
+    // Welcome,
+
     AboutPage,
     ContactPage,
     HomePage,
@@ -58,8 +55,13 @@ import { Contacts } from '../providers/contacts';
       name: '__mydb',
          driverOrder: ['indexeddb', 'sqlite', 'websql']
     }),
+    IonicStorageModule.forRoot({
+      name: '__mydb',
+         driverOrder: ['indexeddb', 'sqlite', 'websql']
+    }),
     SettingPageModule,
     ReimbursementPageModule,
+    WelcomeModule,
 
     MultiPickerModule ,
     SharedModule,
@@ -69,8 +71,6 @@ import { Contacts } from '../providers/contacts';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    Welcome,
-    Signup,
     AboutPage,
     ContactPage,
     HomePage,
@@ -87,6 +87,7 @@ import { Contacts } from '../providers/contacts';
     CallNumber,
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    ContactsProvider
   ]
 })
 export class AppModule {}

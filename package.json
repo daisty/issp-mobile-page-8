@@ -23,13 +23,25 @@
         "@ionic-native/call-number": "^4.3.1",
         "@ionic-native/camera": "^4.2.1",
         "@ionic-native/core": "3.10.2",
+<<<<<<< HEAD
+        "@ionic-native/file-transfer": "^4.3.1",
         "@ionic-native/geolocation": "^4.2.1",
         "@ionic-native/http": "^4.2.1",
         "@ionic-native/image-picker": "^4.3.0",
+        "@ionic-native/photo-viewer": "^4.3.1",
+=======
+        "@ionic-native/geolocation": "^4.2.1",
+        "@ionic-native/http": "^4.2.1",
+        "@ionic-native/image-picker": "^4.3.0",
+>>>>>>> 26051107a2004c36cd486e6f436170b2f18d3fab
         "@ionic-native/splash-screen": "3.10.2",
         "@ionic-native/status-bar": "3.10.2",
         "@ionic/storage": "^2.0.1",
         "call-number": "^1.0.1",
+<<<<<<< HEAD
+        "com-sarriaroman-photoviewer": "^1.1.10",
+=======
+>>>>>>> 26051107a2004c36cd486e6f436170b2f18d3fab
         "com.synconset.imagepicker": "~2.1.8",
         "cordova-android": "^6.2.3",
         "cordova-browser": "^4.1.0",
@@ -40,6 +52,10 @@
         "cordova-plugin-console": "^1.0.5",
         "cordova-plugin-device": "^1.1.4",
         "cordova-plugin-file": "^4.3.3",
+<<<<<<< HEAD
+        "cordova-plugin-file-transfer": "^1.6.3",
+=======
+>>>>>>> 26051107a2004c36cd486e6f436170b2f18d3fab
         "cordova-plugin-geolocation": "^2.4.3",
         "cordova-plugin-secure-storage": "^2.6.8",
         "cordova-plugin-splashscreen": "^4.0.3",
@@ -53,10 +69,17 @@
         "ionic-plugin-keyboard": "^2.2.1",
         "ionicons": "3.0.0",
         "jquery": "^3.2.1",
+<<<<<<< HEAD
+        "mx.ferreyra.callnumber": "~0.0.2",
+        "rxjs": "5.1.1",
+        "sw-toolbox": "3.6.0",
+        "zone.js": "0.8.11"
+=======
         "rxjs": "5.1.1",
         "sw-toolbox": "3.6.0",
         "zone.js": "0.8.11",
         "mx.ferreyra.callnumber": "~0.0.2"
+>>>>>>> 26051107a2004c36cd486e6f436170b2f18d3fab
     },
     "devDependencies": {
         "@ionic/app-scripts": "^2.1.4",
@@ -96,7 +119,12 @@
             "cordova-plugin-geolocation": {},
             "cordova-plugin-secure-storage": {},
             "com.synconset.imagepicker": {},
+<<<<<<< HEAD
+            "mx.ferreyra.callnumber": {},
+            "cordova-plugin-file-transfer": {}
+=======
             "mx.ferreyra.callnumber": {}
+>>>>>>> 26051107a2004c36cd486e6f436170b2f18d3fab
         },
         "platforms": [
             "android",

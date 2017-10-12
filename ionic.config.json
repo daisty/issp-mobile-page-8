@@ -7,12 +7,17 @@
   },
   "proxies": [
     {
+
+      "path":"/announcement",
+      "proxyUrl":"http://192.168.0.57:51128"
+    },
+    {
       "path": "/contact",
       "proxyUrl": "http://192.168.0.62:51310"
     },
     {
       "path": "/user",
-      "proxyUrl": "http://192.168.0.54:51702"
+      "proxyUrl": "http://192.168.0.57:51702"
     },
     {
       "path": "/home",
